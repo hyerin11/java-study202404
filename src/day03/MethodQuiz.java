@@ -1,9 +1,16 @@
+package day03;
+
+import java.util.Arrays;
+import java.util.Stack;
+
 public class MethodQuiz {
 
     static String[] foods = {"떡볶이", "치킨", "파스타"};
     static String[] userNames = {"홍길동", "고길동"};
 
+
     public static void main(String[] args) {
+
         printFoods();
         push("라면");
         push("김치찌개");
@@ -15,8 +22,10 @@ public class MethodQuiz {
         int index2 = indexOf("라면땅");
         System.out.println("index2 = " + index2);
 
+//        pop();
         remove("치킨");
         printFoods();
+
 
         boolean flag1 = include("파스타");
         System.out.println("flag1 = " + flag1);
@@ -25,86 +34,91 @@ public class MethodQuiz {
         System.out.println("flag2 = " + flag2);
 
         insert(3, "파인애플");
+
         printFoods();
 
         modify(2, "닭갈비");
         printFoods();
-    }
 
-    // 배열에 저장된 음식을 출력하는 메서드
-    public static void printFoods() {
-        System.out.print("음식 목록: ");
-        for (String food : foods) {
-            System.out.print(food + " ");
+    } // end main
+
+    static void insert(int targetIndex, String newFoodName) {
+        if (isOutOfBounds(targetIndex)) return;
+        String[] temp = copy(1);
+        for (int i = temp.length; i > targetIndex; i--) {
+            temp[i] = temp[i - 1];
         }
-        System.out.println();
+        temp[targetIndex] = newFoodName;
+        foods = temp;
     }
 
-    // 배열에 음식을 추가하는 메서드
-    public static void push(String food) {
-        // 새로운 음식을 추가하기 위해 배열의 크기를 증가시킴
-        foods = Arrays.copyOf(foods, foods.length + 1);
-        // 배열의 마지막 위치에 새로운 음식을 추가
-        foods[foods.length - 1] = food;
+    static void modify(int targetIndex, String newFoodName) {
+        if (isOutOfBounds(targetIndex)) return;
+        foods[targetIndex] = newFoodName;
     }
 
-    // 배열에서 음식의 인덱스를 찾는 메서드
-    public static int indexOf(String food) {
+    static boolean isOutOfBounds(int targetIndex) {
+        return targetIndex < 0 || targetIndex > foods.length - 1;
+    }
+
+    static boolean include(String searchTarget) {
+        return indexOf(searchTarget) != -1;
+    }
+
+    static void printFoods() {
+        System.out.println(Arrays.toString(foods));
+    }
+
+    // 사이즈를 조절해서 새 배열을 만드는 함수
+    static String[] makeNewArray(int size) {
+        return new String[foods.length + size];
+    }
+
+    // 기존 데이터를 복사하는 함수
+    static String[] copy(int size) {
+        // size를 조절한 배열 생성
+        String[] temp = makeNewArray(size);
+
+        int loopCount = (size >= 0) ? foods.length : temp.length;
+
+        for (int i = 0; i < loopCount; i++) {
+            temp[i] = foods[i];
+        }
+        return temp;
+    }
+
+    // foods배열에 데이터를 끝에 추가하는 함수
+    static void push(String newFood) {
+        String[] temp = copy(1);
+        // 새 배열의 끝인덱스에 새 데이터 추가
+        temp[temp.length - 1] = newFood;
+        foods = temp;
+    }
+
+    // foods배열에서 특정 데이터의 인덱스를 반환
+    static int indexOf(String searchFood) {
         for (int i = 0; i < foods.length; i++) {
-            if (foods[i].equals(food)) {
+            if (searchFood.equals(foods[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    // 배열에서 음식을 제거하는 메서드
-    public static void remove(String food) {
-        int index = indexOf(food);
-        if (index != -1) {
-            // 배열에서 해당 음식을 제외한 새로운 배열 생성
-            String[] newFoods = new String[foods.length - 1];
-            for (int i = 0, j = 0; i < foods.length; i++) {
-                if (i != index) {
-                    newFoods[j++] = foods[i];
-                }
-            }
-            // 기존 배열을 새로운 배열로 대체
-            foods = newFoods;
-        } else {
-            System.out.println("해당 음식이 존재하지 않습니다.");
-        }
+    // foods배열에서 맨 끝데이터를 삭제하는 함수
+    static void pop() {
+        foods = copy(-1);
     }
 
-    // 배열에 특정 음식이 포함되어 있는지 확인하는 메서드
-    public static boolean include(String food) {
-        for (String item : foods) {
-            if (item.equals(food)) {
-                return true;
-            }
+    static void remove(String deleteTarget) {
+        int index = indexOf(deleteTarget);
+        if (index == -1) return;
+
+        for (int i = index; i < foods.length - 1; i++) {
+            foods[i] = foods[i + 1];
         }
-        return false;
+        pop();
     }
 
-    // 배열에 특정 위치에 음식을 삽입하는 메서드
-    public static void insert(int index, String food) {
-        // 배열 크기를 확장하여 새로운 음식을 추가
-        foods = Arrays.copyOf(foods, foods.length + 1);
-        // index 위치에 새로운 음식 삽입을 위해 이후의 음식들을 뒤로 이동
-        for (int i = foods.length - 1; i > index; i--) {
-            foods[i] = foods[i - 1];
-        }
-        // 새로운 음식을 index 위치에 삽입
-        foods[index] = food;
-    }
 
-    // 배열의 특정 위치의 음식을 변경하는 메서드
-    public static void modify(int index, String food) {
-        // 주어진 인덱스가 배열 범위를 벗어나면 수정하지 않음
-        if (index < 0 || index >= foods.length) {
-            System.out.println("인덱스 범위를 벗어납니다.");
-            return;
-        }
-        foods[index] = food;
-    }
 }
