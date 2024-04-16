@@ -29,6 +29,22 @@ public class Test {
            ];
          */
 
+        System.out.println("=====================");
+        for (Member m : members) {
+            System.out.println(m.memberName);
+        }
+
+        System.out.println("=====================");
+
+        MemberRepository mr = new MemberRepository();
+        MemberView mv = new MemberView();
+
+        Member newMember = new Member("ddd@fff.com", "4321", "찰떡이", "남성", 12);
+
+        mr.addNewMember(newMember);
+
+        mv.showMembers();
+
 
     }
 }
