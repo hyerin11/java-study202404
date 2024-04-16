@@ -16,7 +16,11 @@ public class MemberRepository {
 
     // 메서드
 
-    // 회원정보 생성
+
+    /**
+     * 생성된 회원정보를 회원 배열에 끝에 추가하는 기능
+     * @param newMember - 사용자의 입력으로 전달된 회원 정보 객체
+     */
     void addNewMember(Member newMember) {
 
         // 배열에 데이터를 추가하는 로직
@@ -28,4 +32,30 @@ public class MemberRepository {
         members = temp;
     }
 
+    /**
+     * 이메일 중복을 확인하는 기능
+     * @param targetEmail - 검사할 사용자의 입력 이메일 값
+     * @return - 이메일이 이미 존재한다면 true,
+     *           존재하지 않는 사용가능한 이메일이면 false
+     * @author - 코딩킹
+     * @since 2024.04.16
+     */
+    boolean isDuplicateEmail(String targetEmail) {
+        return findMemberByEmail(targetEmail) != null;
+    }
+
+    /**
+     * 이메일을 통해 회원의 모든 정보(객체)를 가져오는 메서드
+     * @param inputEmail - 사용자가 입력한 이메일값
+     * @return - 해당 이메일을 통해 찾아낸 회원 객체,
+     *           만약 찾지 못하면 null을 리턴
+     */
+    public Member findMemberByEmail(String inputEmail) {
+        for (Member m : members) {
+            if (inputEmail.equals(m.email)) {
+                return m;
+            }
+        }
+        return null;
+    }
 }
