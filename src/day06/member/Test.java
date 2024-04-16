@@ -15,10 +15,10 @@ public class Test {
         arr[1] = m2;
         arr[2] = new Member("ad", "d", "d", "d", 3);
 
-        System.out.println("m1 = " + m1);
-        System.out.println("m2 = " + m2);
-
-        Member[] members = {m1, m2};
+//        System.out.println("m1 = " + m1);
+//        System.out.println("m2 = " + m2);
+//
+//        Member[] members = {m1, m2};
         /*
            const members = [
                 {
@@ -29,22 +29,26 @@ public class Test {
            ];
          */
 
-        System.out.println("=====================");
-        for (Member m : members) {
-            System.out.println(m.memberName);
-        }
-
-        System.out.println("=====================");
+//        System.out.println("=====================");
+//        for (Member m : members) {
+//            System.out.println(m.memberName);
+//        }
+//
+//        System.out.println("=====================");
+//
+//        MemberRepository mr = new MemberRepository();
+//        MemberView mv = new MemberView();
+//
+//        Member newMember = new Member("ddd@fff.com", "4321", "찰떡이", "남성", 12);
+//
+//        mr.addNewMember(newMember);
+//
+//        mv.showMembers();
 
         MemberRepository mr = new MemberRepository();
-        MemberView mv = new MemberView();
 
-        Member newMember = new Member("ddd@fff.com", "4321", "찰떡이", "남성", 12);
-
-        mr.addNewMember(newMember);
-
-        mv.showMembers();
-
+        Member foundMember = mr.findMemberByEmail("xyz123@def.com");
+        System.out.println("foundMember = " + foundMember);
 
     }
 }

@@ -71,4 +71,22 @@ public class MemberView {
         }
     }
 
+    // 이메일 입력받고 찾은 회원정보를 출력
+    public void getMember() {
+        String inputEmail = si.input("# 조회하실 회원의 이메일을 입력하세요.\n>> ");
+
+        // 이메일이 일치하는 회원이 있는지 조회
+        Member foundMember = mr.findMemberByEmail(inputEmail);
+
+        if (foundMember != null) {
+            System.out.println("============= 조회 결과 ============");
+            System.out.println("# 이름: " + foundMember.memberName);
+            System.out.println("# 비밀번호: " + foundMember.password);
+            System.out.println("# 성별: " + foundMember.gender);
+            System.out.println("# 나이: " + foundMember.age);
+            System.out.println();
+        } else {
+            System.out.println("\n# 해당 회원은 존재하지 않습니다.");
+        }
+    }
 }
