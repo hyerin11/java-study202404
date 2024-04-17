@@ -122,6 +122,8 @@ public class MemberRepository {
 
     public void restore(String inputEmail) {
 
+        members.remove(0);
+
         int index = restoreList.findIndex(inputEmail);
         Member removed = restoreList.remove(index);
         members.push(removed);
