@@ -64,5 +64,8 @@ public class Main {
         Car ttt = new Tuson();
         Tuson tts = (Tuson) ttt; //이건 가능
 
+
+        driver.drive(new Tuson());
+
     }
 }
