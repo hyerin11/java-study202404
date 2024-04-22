@@ -8,6 +8,8 @@ public class BookUser {
     private Gender gender; // 성별
     private int couponCount; // 쿠폰 갯수
 
+    private BookList rentalBookList; // 대여한 책들 정보
+
     public BookUser() {
     }
 
