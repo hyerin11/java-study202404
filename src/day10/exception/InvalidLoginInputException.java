@@ -1,10 +1,11 @@
 package day10.exception;
 
-public class InvalidLoginInputException {
-    public InvalidLoginInputException(){
+public class InvalidLoginInputException extends Exception {
 
+    public InvalidLoginInputException() {
     }
-    public InvalidLoginInputException(String message){
 
+    public InvalidLoginInputException(String message) {
+        super(message);
     }
 }
