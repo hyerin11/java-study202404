@@ -9,7 +9,7 @@ public class StringList {
     String[] sArr;
 
     // 생성자를 통해 스트링 배열을 초기화함
-    StringList() {
+    public StringList() {
         sArr = new String[0];
     }
 
