@@ -35,7 +35,19 @@ public class MemberView {
         String name = si.input("- 이름: ");
         String password = si.input("- 패스워드: ");
         String gender = si.input("- 성별: ");
-        int age = Integer.parseInt(si.input("- 나이: "));
+
+
+
+        int age = 0;
+        while (true){
+            try{
+                age = Integer.parseInt(si.input("- 나이: "));
+                break;
+            }catch (NumberFormatException e){
+                System.out.println("숫자를 입력하세요");
+            }
+        }
+
 
         // 입력데이터를 기반으로 한 명의 회원 객체를 생성
         Member newMember = new Member(email, password, name, gender, age);
