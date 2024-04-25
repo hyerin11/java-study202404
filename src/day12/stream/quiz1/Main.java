@@ -1,10 +1,10 @@
 package day12.stream.quiz1;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.sql.SQLOutput;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 public class Main {
@@ -150,7 +150,14 @@ public class Main {
                 });
 
 
-
+//        Map<Integer, List<Transaction>> cambridgeTrsMap = transactions.stream()
+//                .filter(trs -> trs.getTrader().getCity().equals("Cambridge"))
+//                .collect(Collectors.groupingBy(trs -> trs.getYear()));
+//        System.out.println("=================");
+//        cambridgeTrsMap.forEach((key, value)->{
+//            System.out.println("year = " + key);
+//            value.forEach(System.out::println);
+//        });
 
 
         // 연습 12. 모든 거래 중 가장 큰 거래액과 가장 작은 거래액의 차이를 계산하시오.
